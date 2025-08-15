@@ -43,7 +43,7 @@ const Index = () => {
       t.onError(() => {
         setTask(undefined)
         Taro.showToast({
-          title: '连接服务器失败',
+          title: 'server connection failed',
           icon: 'none'
         })
       })
@@ -149,9 +149,9 @@ const Index = () => {
         })
       } else {
         Taro.showModal({
-          title: '提示',
-          content: '聊天服务器已断开',
-          confirmText: '重新连接'
+          title: 'Hint',
+          content: 'Chat server disconnected',
+          confirmText: 'Reconnect'
         }).then(res => {
           if (res.confirm) {
             connect()
@@ -248,7 +248,7 @@ const Index = () => {
     }}>
       {
         setting?.is_show_queue  && waitingCount > 0 && <View className={"fixed px-1 h-6 flex items-center w-full text-xs bg-[#fcf6ed] text-[#de8c17]"}>
-          前面还有{waitingCount}人在等待
+          {waitingCount}ahead
         </View>
       }
       <View className={classNames("flex flex-col justify-between w-full bg-[#f5f5f5] overflow-hidden box-border", {
@@ -264,7 +264,7 @@ const Index = () => {
             }
             {
               !loading && noMore && <View className={"text-center py-3 text-xs text-gray-600"}>
-                没有更多了
+                no more.
               </View>
             }
           </MessageContainer>

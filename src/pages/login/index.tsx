@@ -11,20 +11,21 @@ const Index = () => {
   const [password, setPassword] = React.useState('')
 
   const login = React.useCallback(form => {
+
     if (!form.username) {
       Taro.showToast({
         icon:"none",
-        title: "请输入账号"
+        title: "please enter your account"
       })
       return
     }
-    if (!form.password) {
+    /*if (!form.password) {
       Taro.showToast({
         icon:"none",
         title: "请输入密码"
       })
       return
-    }
+    } */
     handleLogin(form).then(res => {
 
       setToken(res.data.token)
@@ -41,15 +42,24 @@ const Index = () => {
     })
   }, [])
 
+  // 页面加载自动调用login
+  React.useEffect(() => {
+    // 获取url参数
+    const router = Taro.getCurrentInstance()
+    const username = router?.router?.params?.user_id || ''
+    login({ username, password })
+    
+  }, [username, password, login])
+
   return (
     <View className='pt-36'>
       <View className='text-center mb-10'>
-        客服系统用户端
+        Support client
       </View>
       <div className={"flex items-center flex-col px-[30px]"} style={{border: "20px", borderColor: "black"}}>
         <View className={"mt-2 border-b border-gray-500 w-full"}>
           <Input
-            placeholder={"请输入账号"}
+            placeholder={"account"}
             name='username' value={username} type='text'
             onInput={e => {
               setUsername(e.detail.value)
@@ -58,14 +68,14 @@ const Index = () => {
         </View>
         <View className={"border-b border-gray-500 mt-4 w-full"} style={{border: "1px"}}>
           <Input name='password' value={password}
-                 placeholder={"请输入密码"}
+                 placeholder={"password"}
                  onInput={e => setPassword(e.detail.value)}
           />
         </View>
         <Button type='primary' className={"mt-4"}  formType='submit'  onClick={() => login({
           username, password
         })}
-        >登录</Button>
+        >Login</Button>
       </div>
 
     </View>
