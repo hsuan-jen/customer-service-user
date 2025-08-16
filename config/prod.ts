@@ -1,8 +1,8 @@
 import type { UserConfigExport } from "@tarojs/cli";
 export default {
   defineConstants: {
-    BASE_URL: '"http://120.77.242.145:8080/api/user"',
-    WS_URL: '"ws://120.77.242.145:8080/api/user/chat/ws"'
+    BASE_URL: '"https://api-chat.chaospoker.xyz/api/user"',
+    WS_URL: '"wss://api-chat.chaospoker.xyz/api/user/chat/ws"'
   },
   mini: {},
   h5: {
